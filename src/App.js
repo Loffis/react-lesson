@@ -1,8 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
-
-
 
 class ProductList extends React.Component {
     constructor(props) {
@@ -31,10 +28,6 @@ class ProductList extends React.Component {
                 }
             ]
         };
-
-      
-        
-
     }
 
     sortList() {
@@ -47,15 +40,12 @@ class ProductList extends React.Component {
             }
             return 0;
         }
-        console.table(this.state.products);
-        let tempProducts = this.state.products;
-        
 
+        let tempProducts = this.state.products;
         tempProducts.sort(compare);
         this.setState({
             products: tempProducts
         });
-        console.table(this.state.products);
     }
 
     handleSubmit(event) {
@@ -85,6 +75,4 @@ function ProductInfo(props) {
     );
 }
 
-
 export default ProductList;
-
