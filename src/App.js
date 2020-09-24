@@ -5,9 +5,8 @@ import './App.css';
 
 class Money extends React.Component {
     constructor(props) {
-    super(props);
-    this.state = { counterValue: 10 };
-    //this.increaseValue = this.increaseValue.bind(this);
+        super();
+        this.state = { counterValue: 0 };
     }
 
     increaseValue(increase) {
