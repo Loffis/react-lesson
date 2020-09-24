@@ -4,43 +4,87 @@ import './App.css';
 
 
 
-class Cities extends React.Component {
+class ProductList extends React.Component {
     constructor(props) {
-    super();
-    this.state = {  
-        cityArray: ["Ingelstad", "Stenslanda", "Tävelsås", "Jät", "Uråsa"]
-                };
-    this.handleSubmit = this.handleSubmit.bind(this);
+        super();
+        this.state = {  
+            products: [
+                {
+                    id: 1,
+                    name: "BC Rich Warlock",
+                    price: 8999
+                },
+                {
+                    id: 2,
+                    name: "Gibson Les Paul",
+                    price: 7499
+                },
+                {
+                    id: 3,
+                    name: "Jackson King V",
+                    price: 12999
+                },
+                {
+                    id: 4,
+                    name: "Fender Stratocaster",
+                    price: 2999
+                }
+            ]
+        };
 
+      
+        
+
+    }
+
+    sortList() {
+        function compare(a,b ) {
+            if (a.price < b.price) {
+                return -1;
+            }
+            if (a.price > b.price) {
+                return 1;
+            }
+            return 0;
+        }
+        console.table(this.state.products);
+        let tempProducts = this.state.products;
+        
+
+        tempProducts.sort(compare);
+        this.setState({
+            products: tempProducts
+        });
+        console.table(this.state.products);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        let arr = [...this.state.cityArray];
-        console.log(event.target.inputCity.value);
-        arr.push(event.target.inputCity.value);
-        this.setState({ cityArray: arr});
     }
 
     render() {
         return (
             <div>
                 <ul>
-                    {this.state.cityArray.map((city) => (
-                        <li>{city}</li>
+                    {this.state.products.map((product) => (
+                        <ProductInfo product = {product} />
                     ))}
                 </ul>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        City to add: 
-                        <input name="inputCity" type="text" placeholder="Enter a city" value={this.state.inputCity} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <button onClick={() => this.sortList()}>Sort by price</button>
             </div>
         );
     }  
 }
 
-export default Cities;
+function ProductInfo(props) {
+    return (
+        <article>
+            <h3>{props.product.name}</h3>
+            <p>{props.product.price}:-</p>
+        </article>
+    );
+}
+
+
+export default ProductList;
 
