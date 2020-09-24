@@ -1,37 +1,46 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 
 
 
-class Money extends React.Component {
+class Cities extends React.Component {
     constructor(props) {
-    super(props);
-    this.state = { counterValue: 10 };
-    //this.increaseValue = this.increaseValue.bind(this);
+    super();
+    this.state = {  
+        cityArray: ["Ingelstad", "Stenslanda", "Tävelsås", "Jät", "Uråsa"]
+                };
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
-    increaseValue(increase) {
-        this.setState({
-            counterValue: this.state.counterValue + increase
-        });
-    }
-
-    doubleValue() {
-        this.setState({
-            counterValue: this.state.counterValue * 2
-        });
+    handleSubmit(event) {
+        event.preventDefault();
+        let arr = [...this.state.cityArray];
+        console.log(event.target.inputCity.value);
+        arr.push(event.target.inputCity.value);
+        this.setState({ cityArray: arr});
     }
 
     render() {
         return (
             <div>
-                <h1>VALUE: {this.state.counterValue}</h1>
-                <button onClick={() => this.increaseValue((Math.floor(Math.random() * 10) ))}>+ random</button>
-                <button onClick={() => this.increaseValue(1)}>+1</button>
-                <button onClick={() => this.doubleValue()}>double</button>
+                <ul>
+                    {this.state.cityArray.map((city) => (
+                        <li>{city}</li>
+                    ))}
+                </ul>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        City to add: 
+                        <input name="inputCity" type="text" placeholder="Enter a city" value={this.state.inputCity} onChange={this.handleChange}/>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
         );
     }  
 }
 
-export default Money;
+export default Cities;
+
