@@ -57,7 +57,7 @@ class ProductList extends React.Component {
             <div>
                 <ul>
                     {this.state.products.map((product) => (
-                        <ProductInfo product = {product} />
+                        <ProductInfo key={product.id} product = {product} />
                     ))}
                 </ul>
                 <button onClick={() => this.sortList()}>Sort by price</button>
